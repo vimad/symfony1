@@ -256,7 +256,7 @@ abstract class sfRouting
     {
       if (0 === strpos($url, 'http'))
       {
-        $url = preg_replace('#https?\://[^/]+#', '$0'.$this->options['context']['prefix'], $url);
+        $url = preg_replace_callback('#https?\://[^/]+#', '$0'.$this->options['context']['prefix'], $url);
       }
       else
       {

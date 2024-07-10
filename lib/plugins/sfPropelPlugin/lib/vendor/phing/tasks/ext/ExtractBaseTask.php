@@ -133,7 +133,7 @@ abstract class ExtractBaseTask extends MatchingTask {
                 $compressArchiveFilename = $compressArchivePathInfo['filename'];
                 if(!empty($this->removepath) && strlen($compressArchiveFilename) >= strlen($this->removepath))
                 {
-                    $compressArchiveFilename = preg_replace('/^' . $this->removepath . '/','', $compressArchiveFilename);
+                    $compressArchiveFilename = preg_replace_callback('/^' . $this->removepath . '/','', $compressArchiveFilename);
                 }
                 $compressArchivePath = new PhingFile($this->todir, $compressArchiveFilename);
                 

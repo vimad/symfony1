@@ -372,7 +372,7 @@ abstract class sfWidget
    */
   static public function fixDoubleEscape($escaped)
   {
-    return preg_replace('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $escaped);
+    return preg_replace_callback('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $escaped);
   }
 
   /**

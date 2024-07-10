@@ -326,7 +326,7 @@ class PropertyTask extends Task {
 
             // There may be a nice regex/callback way to handle this
             // replacement, but at the moment it is pretty complex, and
-            // would probably be a lot uglier to work into a preg_replace_callback()
+            // would probably be a lot uglier to work into a preg_replace_callback_callback()
             // system.  The biggest problem is the fact that a resolution may require
             // multiple passes.
             

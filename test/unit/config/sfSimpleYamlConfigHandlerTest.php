@@ -26,8 +26,8 @@ $t->is($array['article']['title'], 'bar', '->execute() returns configuration fil
 function get_retval($config, $files)
 {
   $retval = $config->execute($files);
-  $retval = preg_replace('#^<\?php#', '', $retval);
-  $retval = preg_replace('#<\?php$#s', '', $retval);
+  $retval = preg_replace_callback('#^<\?php#', '', $retval);
+  $retval = preg_replace_callback('#<\?php$#s', '', $retval);
 
   return eval($retval);
 }

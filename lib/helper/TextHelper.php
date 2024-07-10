@@ -44,7 +44,7 @@ function truncate_text($text, $length = 30, $truncate_string = '...', $truncate_
     $truncate_text = $substr($text, 0, $length - $strlen($truncate_string));
     if ($truncate_lastspace)
     {
-      $truncate_text = preg_replace('/\s+?(\S+)?$/', '', $truncate_text);
+      $truncate_text = preg_replace_callback('/\s+?(\S+)?$/', '', $truncate_text);
     }
     $text = $truncate_text.$truncate_string;
   }
@@ -63,9 +63,9 @@ function truncate_text($text, $length = 30, $truncate_string = '...', $truncate_
  * passing +highlighter+ as single-quoted string with \1 where the phrase is supposed to be inserted.
  * N.B.: The +phrase+ is sanitized to include only letters, digits, and spaces before use.
  *
- * @param string $text subject input to preg_replace.
+ * @param string $text subject input to preg_replace_callback.
  * @param string $phrase string or array of words to highlight
- * @param string $highlighter regex replacement input to preg_replace.
+ * @param string $highlighter regex replacement input to preg_replace_callback.
  *
  * @return string
  */
@@ -95,7 +95,7 @@ function highlight_text($text, $phrase, $highlighter = '<strong class="highlight
     $replacement = $highlighter;
   }
 
-  return preg_replace($pattern, $replacement, $text);
+  return preg_replace_callback($pattern, $replacement, $text);
 }
 
 /**
@@ -139,11 +139,11 @@ function excerpt_text($text, $phrase, $radius = 100, $excerpt_string = '...', $e
       // only cut off at ends where $exceprt_string is added
       if($prefix)
       {
-        $excerpt = preg_replace('/^(\S+)?\s+?/', ' ', $excerpt);
+        $excerpt = preg_replace_callback('/^(\S+)?\s+?/', ' ', $excerpt);
       }
       if($postfix)
       {
-        $excerpt = preg_replace('/\s+?(\S+)?$/', ' ', $excerpt);
+        $excerpt = preg_replace_callback('/\s+?(\S+)?$/', ' ', $excerpt);
       }
     }
 
@@ -162,7 +162,7 @@ function excerpt_text($text, $phrase, $radius = 100, $excerpt_string = '...', $e
  */
 function wrap_text($text, $line_width = 80)
 {
-  return preg_replace('/(.{1,'.$line_width.'})(\s+|$)/s', "\\1\n", preg_replace("/\n/", "\n\n", $text));
+  return preg_replace_callback('/(.{1,'.$line_width.'})(\s+|$)/s', "\\1\n", preg_replace_callback("/\n/", "\n\n", $text));
 }
 
 /**
@@ -213,7 +213,7 @@ function auto_link_text($text, $link = 'all', $href_options = array(), $truncate
  */
 function strip_links_text($text)
 {
-  return preg_replace('/<a[^>]*>(.*?)<\/a>/s', '\\1', $text);
+  return preg_replace_callback('/<a[^>]*>(.*?)<\/a>/s', '\\1', $text);
 }
 
 if (!defined('SF_AUTO_LINK_RE'))
@@ -271,7 +271,7 @@ function _auto_link_urls($text, $href_options = array(), $truncate = false, $tru
     }
     ';
 
-  return preg_replace_callback(
+  return preg_replace_callback_callback(
     SF_AUTO_LINK_RE,
     create_function('$matches', $callback_function),
     $text
@@ -284,9 +284,9 @@ function _auto_link_urls($text, $href_options = array(), $truncate = false, $tru
 function _auto_link_email_addresses($text)
 {
   // Taken from http://snippets.dzone.com/posts/show/6156
-  return preg_replace("#(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $text);
+  return preg_replace_callback("#(^|[\n ])([a-z0-9&\-_\.]+?)@([\w\-]+\.([\w\-\.]+\.)*[\w]+)#i", "\\1<a href=\"mailto:\\2@\\3\">\\2@\\3</a>", $text);
 
   // Removed since it destroys already linked emails 
   // Example:   <a href="mailto:me@example.com">bar</a> gets <a href="mailto:me@example.com">bar</a> gets <a href="mailto:<a href="mailto:me@example.com">bar</a>
-  //return preg_replace('/([\w\.!#\$%\-+.]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+)/', '<a href="mailto:\\1">\\1</a>', $text);
+  //return preg_replace_callback('/([\w\.!#\$%\-+.]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+)/', '<a href="mailto:\\1">\\1</a>', $text);
 }

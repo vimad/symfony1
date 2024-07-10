@@ -304,7 +304,7 @@ abstract class sfTask
    */
   public function getDetailedDescription()
   {
-    return preg_replace('/\[(.+?)\|(\w+)\]/se', '$this->formatter->format("$1", "$2")', $this->detailedDescription);
+    return preg_replace_callback('/\[(.+?)\|(\w+)\]/se', '$this->formatter->format("$1", "$2")', $this->detailedDescription);
   }
 
   /**
@@ -583,7 +583,7 @@ abstract class sfTask
     $taskXML->appendChild($helpXML = $dom->createElement('help'));
     $help = $this->detailedDescription;
     $help = str_replace(array('|COMMENT', '|INFO'), array('|strong', '|em'), $help);
-    $help = preg_replace('/\[(.+?)\|(\w+)\]/s', '<$2>$1</$2>', $help);
+    $help = preg_replace_callback('/\[(.+?)\|(\w+)\]/s', '<$2>$1</$2>', $help);
     $helpXML->appendChild($dom->createTextNode(implode("\n ", explode("\n", $help))));
 
     $taskXML->appendChild($aliasesXML = $dom->createElement('aliases'));

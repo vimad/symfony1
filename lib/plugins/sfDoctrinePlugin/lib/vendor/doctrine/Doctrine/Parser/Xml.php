@@ -66,7 +66,7 @@ class Doctrine_Parser_Xml extends Doctrine_Parser
 
         foreach($array as $key => $value)
         {
-            $key = preg_replace('/[^a-z]/i', '', $key);
+            $key = preg_replace_callback('/[^a-z]/i', '', $key);
 
             if (is_array($value) && ! empty($value)) {
                 $node = $xml->addChild($key);

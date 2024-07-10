@@ -405,7 +405,7 @@ $expected = <<<EOF
 </tr>
 
 EOF;
-$t->is(str_replace("\n", '', preg_replace('/^ +/m', '', $w->render(null))), str_replace("\n", '', preg_replace('/^ +/m', '', fix_linebreaks($expected))), '->render() is able to render widget schema that only contains hidden fields when the last field is a form');
+$t->is(str_replace("\n", '', preg_replace_callback('/^ +/m', '', $w->render(null))), str_replace("\n", '', preg_replace_callback('/^ +/m', '', fix_linebreaks($expected))), '->render() is able to render widget schema that only contains hidden fields when the last field is a form');
 
 // __clone()
 $t->diag('__clone()');

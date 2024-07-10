@@ -144,7 +144,7 @@ class TGettext
             $rmap = array('\"', '\\n"' . "\n" . '"', '\\t', '\\r');
             return (string) str_replace($smap, $rmap, $string);
         } else {
-        	$string = preg_replace('/"\s+"/', '', $string);
+        	$string = preg_replace_callback('/"\s+"/', '', $string);
             $smap = array('\\n', '\\r', '\\t', '\"');
             $rmap = array("\n", "\r", "\t", '"');
             return (string) str_replace($smap, $rmap, $string);

@@ -106,7 +106,7 @@ $1{";
 			$filter['#\t#'] = str_repeat(' ', $this->getParameter('tab_size'));
 		}
 		
-		$script = preg_replace(array_keys($filter), array_values($filter), $script);
+		$script = preg_replace_callback(array_keys($filter), array_values($filter), $script);
 		
 		if ($this->getParameter('strip_comments') == 'true') {
 			$script = self::stripComments($script);

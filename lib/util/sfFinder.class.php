@@ -382,7 +382,7 @@ class sfFinder
 
       if ($this->relative)
       {
-        $new_files = preg_replace('#^'.preg_quote(rtrim($dir, '/'), '#').'/#', '', $new_files);
+        $new_files = preg_replace_callback('#^'.preg_quote(rtrim($dir, '/'), '#').'/#', '', $new_files);
       }
 
       $files = array_merge($files, $new_files);

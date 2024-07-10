@@ -113,7 +113,7 @@ EOF;
 
 $stripped_php = '<?php $i = 1; ';
 
-$t->is(preg_replace('/\s*(\r?\n)+/', ' ', sfToolkit::stripComments($php)), $stripped_php, '::stripComments() strip all comments from a php string');
+$t->is(preg_replace_callback('/\s*(\r?\n)+/', ' ', sfToolkit::stripComments($php)), $stripped_php, '::stripComments() strip all comments from a php string');
 
 $php = <<<EOF
 <?php

@@ -578,7 +578,7 @@ class Doctrine_Query extends Doctrine_Query_Abstract implements Countable
     {
         if (strtoupper(substr(trim($expr, '( '), 0, 6)) !== 'SELECT') {
             // Fix for http://www.doctrine-project.org/jira/browse/DC-754
-            $expr = preg_replace('/([\'\"])[^\1]*\1/', '', $expr);
+            $expr = preg_replace_callback('/([\'\"])[^\1]*\1/', '', $expr);
             preg_match_all("/[a-z_][a-z0-9_]*\.[a-z_][a-z0-9_]*[\.[a-z0-9]+]*/i", $expr, $matches);
 
             $match = current($matches);

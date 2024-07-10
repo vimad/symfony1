@@ -57,7 +57,7 @@ class sfCompileConfigHandler extends sfYamlConfigHandler
       }
 
       // insert configuration files
-/*      $contents = preg_replace_callback(array('#(require|include)(_once)?\((sfContext::getInstance\(\)\->getConfigCache\(\)|\$configCache)->checkConfig\(\'config/([^\']+)\'\)\);#m',
+/*      $contents = preg_replace_callback_callback_callback(array('#(require|include)(_once)?\((sfContext::getInstance\(\)\->getConfigCache\(\)|\$configCache)->checkConfig\(\'config/([^\']+)\'\)\);#m',
                                           '#()()(sfContext::getInstance\(\)\->getConfigCache\(\)|\$configCache)->import\(\'config/([^\']+)\'(, false)?\);#m'),
                                         array($this, 'insertConfigFileCallback'), $contents);
 */
@@ -69,7 +69,7 @@ class sfCompileConfigHandler extends sfYamlConfigHandler
       $contents = str_replace("\r", "\n", $contents);
 
       // replace multiple new lines with a single newline
-      $contents = preg_replace(array('/\s+$/Sm', '/\n+/S'), "\n", $contents);
+      $contents = preg_replace_callback_callback(array('/\s+$/Sm', '/\n+/S'), "\n", $contents);
 
       // append file data
       $data .= "\n".$contents;
