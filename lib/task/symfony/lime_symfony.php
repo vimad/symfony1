@@ -18,6 +18,6 @@ class lime_symfony extends lime_harness
       $this->extension,
     ), '', $file));
 
-    return preg_replace_callback_callback('#^(.*?)Plugin/test/(unit|functional)/#', '[$1] $2/', $file);
+    return preg_replace('#^(.*?)Plugin/test/(unit|functional)/#', '[$1] $2/', $file);
   }
 }

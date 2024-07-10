@@ -173,8 +173,8 @@ abstract class sfController
   public function forward($moduleName, $actionName)
   {
     // replace unwanted characters
-    $moduleName = preg_replace_callback('/[^a-z0-9_]+/i', '', $moduleName);
-    $actionName = preg_replace_callback('/[^a-z0-9_]+/i', '', $actionName);
+    $moduleName = preg_replace('/[^a-z0-9_]+/i', '', $moduleName);
+    $actionName = preg_replace('/[^a-z0-9_]+/i', '', $actionName);
 
     if ($this->getActionStack()->getSize() >= $this->maxForwards)
     {

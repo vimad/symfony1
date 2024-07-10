@@ -171,7 +171,7 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader 
      * Performs gettext translation of msgid and returns translated text.
      * 
      * This function simply wraps gettext() call, but provides ability to log
-     * string replacements.  (alternative would be using preg_replace_callback with /e which
+     * string replacements.  (alternative would be using preg_replace with /e which
      * would probably be faster, but no ability to debug/log.)
      * 
      * @param array $matches Array of matches; we're interested in $matches[2].
@@ -222,8 +222,8 @@ class TranslateGettext extends BaseParamFilterReader implements ChainableReader 
         // 
         // also match gettext() -- same as above
         
-        $buffer = preg_replace_callback_callback('/([^\w]|^)_\("((\\\"|[^"])*)"\)/', array($this, 'xlateStringCallback'), $buffer);
-        $buffer = preg_replace_callback_callback('/([^\w]|^)gettext\("((\\\"|[^"])*)"\)/', array($this, 'xlateStringCallback'), $buffer);
+        $buffer = preg_replace_callback('/([^\w]|^)_\("((\\\"|[^"])*)"\)/', array($this, 'xlateStringCallback'), $buffer);
+        $buffer = preg_replace_callback('/([^\w]|^)gettext\("((\\\"|[^"])*)"\)/', array($this, 'xlateStringCallback'), $buffer);
 
         // Check to see if there are any _('') calls and flag an error
 

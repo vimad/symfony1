@@ -64,7 +64,7 @@ class MatchValidator implements BasicValidator
 		}
 
 		// if they did not escape / chars; we do that for them
-		$exp = preg_replace_callback('/([^\\\])\/([^$])/', '$1\/$2', $exp);
+		$exp = preg_replace('/([^\\\])\/([^$])/', '$1\/$2', $exp);
 
 		return $exp;
 	}

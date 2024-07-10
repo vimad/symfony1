@@ -169,7 +169,7 @@ class sfCoreAutoload
       }
     }
 
-    $content = preg_replace_callback('/protected \$classes = array *\(.*?\);/s', sprintf("protected \$classes = array(\n%s  );", $classes), file_get_contents(__FILE__));
+    $content = preg_replace('/protected \$classes = array *\(.*?\);/s', sprintf("protected \$classes = array(\n%s  );", $classes), file_get_contents(__FILE__));
 
     file_put_contents(__FILE__, $content);
   }

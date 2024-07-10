@@ -175,7 +175,7 @@ class ProjectConfigurator {
 
     // The following two properties are a sort of hack
     // to enable a static function to serve as the callback
-    // for preg_replace_callback_callback().  Clearly we cannot use object
+    // for preg_replace_callback().  Clearly we cannot use object
     // variables, since the replaceProperties() is called statically.
     // This is IMO better than using global variables in the callback.
     
@@ -199,7 +199,7 @@ class ProjectConfigurator {
             return null;
         }
         
-        // These are a "hack" to support static callback for preg_replace_callback_callback()
+        // These are a "hack" to support static callback for preg_replace_callback()
         
         // make sure these get initialized every time        
         self::$propReplaceProperties = $keys;
@@ -210,12 +210,12 @@ class ProjectConfigurator {
         // the old parsePropertyString() method, since it has more stringent
         // requirements.
         
-        $sb = preg_replace_callback_callback('/\$\{([^}]+)\}/', array('ProjectConfigurator', 'replacePropertyCallback'), $value);
+        $sb = preg_replace_callback('/\$\{([^}]+)\}/', array('ProjectConfigurator', 'replacePropertyCallback'), $value);
         return $sb;        
     }
     
     /**
-     * Private [static] function for use by preg_replace_callback_callback to replace a single param.
+     * Private [static] function for use by preg_replace_callback to replace a single param.
      * This method makes use of a static variable to hold the 
      */
     private static function replacePropertyCallback($matches)

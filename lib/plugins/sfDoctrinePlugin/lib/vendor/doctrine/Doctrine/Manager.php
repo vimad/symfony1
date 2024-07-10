@@ -403,7 +403,7 @@ class Doctrine_Manager extends Doctrine_Configurable implements Countable, Itera
         // fix sqlite dsn so that it will parse correctly
         $dsn = str_replace("////", "/", $dsn);
         $dsn = str_replace("\\", "/", $dsn);
-        $dsn = preg_replace_callback("/\/\/\/(.*):\//", "//$1:/", $dsn);
+        $dsn = preg_replace("/\/\/\/(.*):\//", "//$1:/", $dsn);
 
         // silence any warnings
         $parts = @parse_url($dsn);

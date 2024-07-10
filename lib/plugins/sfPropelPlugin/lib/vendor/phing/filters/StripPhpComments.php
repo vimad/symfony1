@@ -68,7 +68,7 @@ class StripPhpComments extends BaseFilterReader implements ChainableReader {
         }
         
         // This regex replace /* */ and // style comments
-        $buffer = preg_replace_callback('/\/\*[^*]*\*+([^\/*][^*]*\*+)*\/|\/\/[^\n]*|("(\\\\.|[^"\\\\])*"|\'(\\\\.|[^\'\\\\])*\'|.[^\/"\'\\\\]*)/s', "$2", $buffer);
+        $buffer = preg_replace('/\/\*[^*]*\*+([^\/*][^*]*\*+)*\/|\/\/[^\n]*|("(\\\\.|[^"\\\\])*"|\'(\\\\.|[^\'\\\\])*\'|.[^\/"\'\\\\]*)/s', "$2", $buffer);
                 
         // The regex above is not identical to, but is based on the expression below:
         //

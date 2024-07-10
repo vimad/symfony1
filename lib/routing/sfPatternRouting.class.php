@@ -511,7 +511,7 @@ class sfPatternRouting extends sfRouting
     }
 
     // remove multiple /
-    $url = preg_replace_callback('#/+#', '/', $url);
+    $url = preg_replace('#/+#', '/', $url);
 
     return $url;
   }

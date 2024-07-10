@@ -360,7 +360,7 @@ abstract class OMBuilder extends DataModelBuilder {
         } else {
           // regular hook: the behavior returns a string to append to the script string
           $script .= "\n" . $tab . '// ' . $behavior->getName() . " behavior\n";
-          $script .= preg_replace_callback('/^/m', $tab, $modifier->$hookName());           
+          $script .= preg_replace('/^/m', $tab, $modifier->$hookName());           
          }
       }
     }

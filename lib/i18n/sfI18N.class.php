@@ -293,7 +293,7 @@ class sfI18N
     $dateFormat = $dateFormatInfo->getShortDatePattern();
 
     // We construct the regexp based on date format
-    $dateRegexp = preg_replace_callback('/[dmy]+/i', '(\d+)', preg_quote($dateFormat));
+    $dateRegexp = preg_replace('/[dmy]+/i', '(\d+)', preg_quote($dateFormat));
 
     // We parse date format to see where things are (m, d, y)
     $a = array(
@@ -338,7 +338,7 @@ class sfI18N
     $timeFormat = $timeFormatInfo->getShortTimePattern();
 
     // We construct the regexp based on time format
-    $timeRegexp = preg_replace_callback(array('/[hm]+/i', '/a/'), array('(\d+)', '(\w+)'), preg_quote($timeFormat));
+    $timeRegexp = preg_replace(array('/[hm]+/i', '/a/'), array('(\d+)', '(\w+)'), preg_quote($timeFormat));
 
     // We parse time format to see where things are (h, m)
     $timePositions = array(

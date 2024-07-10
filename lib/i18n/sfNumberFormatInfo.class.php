@@ -348,7 +348,7 @@ class sfNumberFormatInfo
     }
 
     $digitPattern = is_int($decimalPos) ? substr($pattern, 0, $decimalPos) : $pattern;
-    $digitPattern  = preg_replace_callback('/[^0]/', '', $digitPattern);
+    $digitPattern  = preg_replace('/[^0]/', '', $digitPattern);
 
     $info['groupPos1']     = $groupPos1;
     $info['groupSize1']    = $groupSize1;

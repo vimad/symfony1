@@ -537,7 +537,7 @@ class Doctrine_DataDict_Pgsql extends Doctrine_DataDict
                 $type[] = 'enum';
                 $length = $length ? $length :255;
                 if($default) {
-                    $default = preg_replace_callback('/\'(\w+)\'.*/', '${1}', $default);
+                    $default = preg_replace('/\'(\w+)\'.*/', '${1}', $default);
                 }
                 break;
             case 'date':

@@ -142,11 +142,11 @@ class sfSymfonyPluginManager extends sfPluginManager
     $file = $configDir.'/ProjectConfiguration.class.php';
     $source = file_get_contents($file);
 
-    $source = preg_replace_callback(sprintf('# *\$this\->enablePlugins\(array\(([^\)]+), *\'%s\'([^\)]*)\)\)#', $plugin), '$this->enablePlugins(array($1$2))', $source);
-    $source = preg_replace_callback(sprintf('# *\$this\->enablePlugins\(array\(\'%s\', *([^\)]*)\)\)#', $plugin), '$this->enablePlugins(array($1))', $source);
-    $source = preg_replace_callback(sprintf('# *\$this\->enablePlugins\(\'%s\'\); *\n?#', $plugin), '', $source);
-    $source = preg_replace_callback(sprintf('# *\$this\->enablePlugins\(array\(\'%s\'\)\); *\n?#', $plugin), '', $source);
-    $source = preg_replace_callback(sprintf('# *\$this\->enablePlugins\(array\(\)\); *\n?#', $plugin), '', $source);
+    $source = preg_replace(sprintf('# *\$this\->enablePlugins\(array\(([^\)]+), *\'%s\'([^\)]*)\)\)#', $plugin), '$this->enablePlugins(array($1$2))', $source);
+    $source = preg_replace(sprintf('# *\$this\->enablePlugins\(array\(\'%s\', *([^\)]*)\)\)#', $plugin), '$this->enablePlugins(array($1))', $source);
+    $source = preg_replace(sprintf('# *\$this\->enablePlugins\(\'%s\'\); *\n?#', $plugin), '', $source);
+    $source = preg_replace(sprintf('# *\$this\->enablePlugins\(array\(\'%s\'\)\); *\n?#', $plugin), '', $source);
+    $source = preg_replace(sprintf('# *\$this\->enablePlugins\(array\(\)\); *\n?#', $plugin), '', $source);
 
     file_put_contents($file, $source);
   }
@@ -185,9 +185,9 @@ class sfSymfonyPluginManager extends sfPluginManager
     $symfony->setChannel('pear.symfony-project.com');
     $symfony->setConfig($this->environment->getConfig());
     $symfony->setPackageType('php');
-    $symfony->setAPIVersion(preg_replace_callback('/\d+(\-\w+)?$/', '0', SYMFONY_VERSION));
+    $symfony->setAPIVersion(preg_replace('/\d+(\-\w+)?$/', '0', SYMFONY_VERSION));
     $symfony->setAPIStability(false === strpos(SYMFONY_VERSION, 'DEV') ? 'stable' : 'beta');
-    $symfony->setReleaseVersion(preg_replace_callback('/\-\w+$/', '', SYMFONY_VERSION));
+    $symfony->setReleaseVersion(preg_replace('/\-\w+$/', '', SYMFONY_VERSION));
     $symfony->setReleaseStability(false === strpos(SYMFONY_VERSION, 'DEV') ? 'stable' : 'beta');
     $symfony->setDate(date('Y-m-d'));
     $symfony->setDescription('symfony');

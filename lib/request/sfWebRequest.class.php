@@ -268,11 +268,11 @@ class sfWebRequest extends sfRequest
         $qs = isset($pathArray['QUERY_STRING']) ? $pathArray['QUERY_STRING'] : '';
         $script_name = $this->getScriptName();
         $uri_prefix = $this->isAbsUri() ? $this->getUriPrefix() : '';
-        $pathInfo = preg_replace_callback('/^'.preg_quote($uri_prefix, '/').'/','',$pathArray['REQUEST_URI']);
-        $pathInfo = preg_replace_callback('/^'.preg_quote($script_name, '/').'/', '', $pathInfo);
-        $prefix_name = preg_replace_callback('#/[^/]+$#', '', $script_name);
-        $pathInfo = preg_replace_callback('/^'.preg_quote($prefix_name, '/').'/', '', $pathInfo);
-        $pathInfo = preg_replace_callback('/\??'.preg_quote($qs, '/').'$/', '', $pathInfo);
+        $pathInfo = preg_replace('/^'.preg_quote($uri_prefix, '/').'/','',$pathArray['REQUEST_URI']);
+        $pathInfo = preg_replace('/^'.preg_quote($script_name, '/').'/', '', $pathInfo);
+        $prefix_name = preg_replace('#/[^/]+$#', '', $script_name);
+        $pathInfo = preg_replace('/^'.preg_quote($prefix_name, '/').'/', '', $pathInfo);
+        $pathInfo = preg_replace('/\??'.preg_quote($qs, '/').'$/', '', $pathInfo);
       }
     }
     else
@@ -280,7 +280,7 @@ class sfWebRequest extends sfRequest
       $pathInfo = $pathArray[$sf_path_info_key];
       if ($relativeUrlRoot = $this->getRelativeUrlRoot())
       {
-        $pathInfo = preg_replace_callback('/^'.str_replace('/', '\\/', $relativeUrlRoot).'\//', '', $pathInfo);
+        $pathInfo = preg_replace('/^'.str_replace('/', '\\/', $relativeUrlRoot).'\//', '', $pathInfo);
       }
     }
 
@@ -604,7 +604,7 @@ class sfWebRequest extends sfRequest
     {
       if (!isset($this->options['relative_url_root']))
       {
-        $this->relativeUrlRoot = preg_replace_callback('#/[^/]+\.php5?$#', '', $this->getScriptName());
+        $this->relativeUrlRoot = preg_replace('#/[^/]+\.php5?$#', '', $this->getScriptName());
       }
       else
       {

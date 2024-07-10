@@ -293,7 +293,7 @@ abstract class sfPropelBaseTask extends sfBaseTask
       foreach (sfPhingListener::getExceptions() as $exception)
       {
         $messages[] = '';
-        $messages[] = preg_replace_callback('/^.*build\-propel\.xml/', 'build-propel.xml', $exception->getMessage());
+        $messages[] = preg_replace('/^.*build\-propel\.xml/', 'build-propel.xml', $exception->getMessage());
         $messages[] = '';
       }
 

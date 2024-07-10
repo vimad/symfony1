@@ -210,7 +210,7 @@ class sfTesterResponse extends sfTester
           $filesystem->replaceTokens($finder->in($cache), '##', '##', array('LOCAL_W3' => $local));
         }
 
-        $content = preg_replace_callback('#(<!DOCTYPE[^>]+")http://www.w3.org(.*")#i', '\\1'.$local.'\\2', $content);
+        $content = preg_replace('#(<!DOCTYPE[^>]+")http://www.w3.org(.*")#i', '\\1'.$local.'\\2', $content);
         $dom->validateOnParse = $checkDTD;
       }
 

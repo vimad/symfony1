@@ -44,6 +44,6 @@ $log = new SimpleXMLElement($out);
 
 foreach ($log->logentry as $logentry)
 {
-  echo sprintf(' * [%d] %s', $logentry['revision'], trim(preg_replace_callback('/\s*\[[\d\., ]+\]\s*/', '', (string) $logentry->msg)));
+  echo sprintf(' * [%d] %s', $logentry['revision'], trim(preg_replace('/\s*\[[\d\., ]+\]\s*/', '', (string) $logentry->msg)));
   echo PHP_EOL;
 }

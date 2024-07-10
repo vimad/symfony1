@@ -138,7 +138,7 @@ class Doctrine_Connection_Pgsql extends Doctrine_Connection_Common
             }
 
             if ($isManip) {
-                $manip = preg_replace_callback('/^(DELETE FROM|UPDATE).*$/', '\\1', $query);
+                $manip = preg_replace('/^(DELETE FROM|UPDATE).*$/', '\\1', $query);
                 $from  = $match[2];
                 $where = $match[3];
                 $query = $manip . ' ' . $from . ' WHERE ctid=(SELECT ctid FROM '

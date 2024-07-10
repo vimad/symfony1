@@ -2742,7 +2742,7 @@ class Doctrine_Table extends Doctrine_Configurable implements Countable
 
         // Check if $fieldName has unidentified parts left 
         if (strlen(implode('', $fieldsFound) . implode('', $operatorFound)) !== strlen($fieldName)) {
-            $expression = preg_replace_callback('/(' . implode('|', $fields) . ')(Or|And)?/', '($1)$2', $fieldName);
+            $expression = preg_replace('/(' . implode('|', $fields) . ')(Or|And)?/', '($1)$2', $fieldName);
             throw new Doctrine_Table_Exception('Invalid expression found: ' . $expression);    
         }
 

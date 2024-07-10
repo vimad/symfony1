@@ -200,8 +200,8 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
      */
     public function fixSequenceName($sqn)
     {
-        $seqPattern = '/^'.preg_replace_callback('/%s/', '([a-z0-9_]+)',  $this->conn->getAttribute(Doctrine_Core::ATTR_SEQNAME_FORMAT)).'$/i';
-        $seqName    = preg_replace_callback($seqPattern, '\\1', $sqn);
+        $seqPattern = '/^'.preg_replace('/%s/', '([a-z0-9_]+)',  $this->conn->getAttribute(Doctrine_Core::ATTR_SEQNAME_FORMAT)).'$/i';
+        $seqName    = preg_replace($seqPattern, '\\1', $sqn);
 
         if ($seqName && ! strcasecmp($sqn, $this->getSequenceName($seqName))) {
             return $seqName;
@@ -217,8 +217,8 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
      */
     public function fixIndexName($idx)
     {
-        $indexPattern   = '/^'.preg_replace_callback('/%s/', '([a-z0-9_]+)', $this->conn->getAttribute(Doctrine_Core::ATTR_IDXNAME_FORMAT)).'$/i';
-        $indexName      = preg_replace_callback($indexPattern, '\\1', $idx);
+        $indexPattern   = '/^'.preg_replace('/%s/', '([a-z0-9_]+)', $this->conn->getAttribute(Doctrine_Core::ATTR_IDXNAME_FORMAT)).'$/i';
+        $indexName      = preg_replace($indexPattern, '\\1', $idx);
         if ($indexName && ! strcasecmp($idx, $this->getIndexName($indexName))) {
             return $indexName;
         }
@@ -234,7 +234,7 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
     public function getSequenceName($sqn)
     {
         return sprintf($this->conn->getAttribute(Doctrine_Core::ATTR_SEQNAME_FORMAT),
-            preg_replace_callback('/[^a-z0-9_\$.]/i', '_', $sqn));
+            preg_replace('/[^a-z0-9_\$.]/i', '_', $sqn));
     }
 
     /**
@@ -246,7 +246,7 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
     public function getIndexName($idx)
     {
         return sprintf($this->conn->getAttribute(Doctrine_Core::ATTR_IDXNAME_FORMAT),
-            preg_replace_callback('/[^a-z0-9_\$]/i', '_', $idx));
+            preg_replace('/[^a-z0-9_\$]/i', '_', $idx));
     }
     
     /**
@@ -258,7 +258,7 @@ class Doctrine_Formatter extends Doctrine_Connection_Module
     public function getForeignKeyName($fkey)
     {
         return sprintf($this->conn->getAttribute(Doctrine_Core::ATTR_FKNAME_FORMAT),
-            preg_replace_callback('/[^a-z0-9_\$]/i', '_', $fkey));
+            preg_replace('/[^a-z0-9_\$]/i', '_', $fkey));
     }
 
     /**

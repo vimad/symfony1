@@ -418,7 +418,7 @@ class sfYamlParser
     {
       $modifiers = isset($matches['modifiers']) ? $matches['modifiers'] : '';
 
-      return $this->parseFoldedScalar($matches['separator'], preg_replace_callback('#\d+#', '', $modifiers), intval(abs($modifiers)));
+      return $this->parseFoldedScalar($matches['separator'], preg_replace('#\d+#', '', $modifiers), intval(abs($modifiers)));
     }
     else
     {
@@ -481,7 +481,7 @@ class sfYamlParser
       }
       else if (preg_match('#^(?P<text> *)$#', $this->currentLine, $matches))
       {
-        $text .= preg_replace_callback('#^ {1,'.strlen($textIndent).'}#', '', $matches['text'])."\n";
+        $text .= preg_replace('#^ {1,'.strlen($textIndent).'}#', '', $matches['text'])."\n";
       }
       else
       {
@@ -494,18 +494,18 @@ class sfYamlParser
     if (' ' == $separator)
     {
       // replace last separator by a newline
-      $text = preg_replace_callback('/ (\n*)$/', "\n$1", $text);
+      $text = preg_replace('/ (\n*)$/', "\n$1", $text);
     }
 
     switch ($indicator)
     {
       case '':
-        $text = preg_replace_callback('#\n+$#s', "\n", $text);
+        $text = preg_replace('#\n+$#s', "\n", $text);
         break;
       case '+':
         break;
       case '-':
-        $text = preg_replace_callback('#\n+$#s', '', $text);
+        $text = preg_replace('#\n+$#s', '', $text);
         break;
     }
 
@@ -593,11 +593,11 @@ class sfYamlParser
 
     // strip YAML header
     $count = 0;
-    $value = preg_replace_callback('#^\%YAML[: ][\d\.]+.*\n#su', '', $value, -1, $count);
+    $value = preg_replace('#^\%YAML[: ][\d\.]+.*\n#su', '', $value, -1, $count);
     $this->offset += $count;
 
     // remove leading comments
-    $trimmedValue = preg_replace_callback('#^(\#.*?\n)+#s', '', $value, -1, $count);
+    $trimmedValue = preg_replace('#^(\#.*?\n)+#s', '', $value, -1, $count);
     if ($count == 1)
     {
       // items have been removed, update the offset
@@ -606,7 +606,7 @@ class sfYamlParser
     }
 
     // remove start of the document marker (---)
-    $trimmedValue = preg_replace_callback('#^\-\-\-.*?\n#s', '', $value, -1, $count);
+    $trimmedValue = preg_replace('#^\-\-\-.*?\n#s', '', $value, -1, $count);
     if ($count == 1)
     {
       // items have been removed, update the offset
@@ -614,7 +614,7 @@ class sfYamlParser
       $value = $trimmedValue;
 
       // remove end of the document marker (...)
-      $value = preg_replace_callback('#\.\.\.\s*$#s', '', $value);
+      $value = preg_replace('#\.\.\.\s*$#s', '', $value);
     }
 
     return $value;

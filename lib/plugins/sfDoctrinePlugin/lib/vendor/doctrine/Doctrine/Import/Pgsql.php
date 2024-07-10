@@ -167,11 +167,11 @@ class Doctrine_Import_Pgsql extends Doctrine_Import
 
             if ($val['type'] == 'character varying') {
                 // get length from varchar definition
-                $length = preg_replace_callback('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
+                $length = preg_replace('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
                 $val['length'] = $length;
             } else if (strpos($val['complete_type'], 'character varying') !== false) {
                 // get length from varchar definition
-                $length = preg_replace_callback('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
+                $length = preg_replace('~.*\(([0-9]*)\).*~', '$1', $val['complete_type']);
                 $val['length'] = $length;
             }
             

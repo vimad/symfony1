@@ -123,7 +123,7 @@ class Doctrine_DataDict_Mssql extends Doctrine_DataDict
      */
     public function getPortableDeclaration($field)
     {
-        $db_type = preg_replace_callback('/[\d\(\)]/','', strtolower($field['type']) );
+        $db_type = preg_replace('/[\d\(\)]/','', strtolower($field['type']) );
         $length  = (isset($field['length']) && $field['length'] > 0) ? $field['length'] : null;
 
         $type = array();

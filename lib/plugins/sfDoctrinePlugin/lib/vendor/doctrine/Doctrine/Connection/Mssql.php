@@ -167,7 +167,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
 
             for ($i = 0; $i < count($orders); $i++) {
                 $sorts[$i] = (stripos($orders[$i], ' desc') !== false) ? 'DESC' : 'ASC';
-                $orders[$i] = trim(preg_replace_callback('/\s+(ASC|DESC)$/i', '', $orders[$i]));
+                $orders[$i] = trim(preg_replace('/\s+(ASC|DESC)$/i', '', $orders[$i]));
 
                 list($fieldAliases[$i], $fields[$i]) = strstr($orders[$i], '.') ? explode('.', $orders[$i]) : array('', $orders[$i]);
                 $columnAlias[$i] = $queryOrigin->getSqlTableAlias($queryOrigin->getExpressionOwner($orders[$i]));
@@ -197,7 +197,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
         $aux2 = explode('.', end($aux2));
         $key_field = trim(end($aux2));
 
-        $query = preg_replace_callback('/^'.$selectRegExp.'/i', $selectReplace . 'TOP ' . ($count + $offset) . ' ', $query);
+        $query = preg_replace('/^'.$selectRegExp.'/i', $selectReplace . 'TOP ' . ($count + $offset) . ' ', $query);
 
         if ($isSubQuery === true) {
             $query = 'SELECT TOP ' . $count . ' ' . $this->quoteIdentifier('inner_tbl') . '.' . $key_field . ' FROM (' . $query . ') AS ' . $this->quoteIdentifier('inner_tbl');
@@ -261,7 +261,7 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
         $tokens = preg_split('/,/', $parsed);
         
         for ($i = 0, $iMax = count($tokens); $i < $iMax; $i++) {
-            $tokens[$i] = trim(preg_replace_callback('/##(\d+)##/e', "\$chunks[\\1]", $tokens[$i]));
+            $tokens[$i] = trim(preg_replace('/##(\d+)##/e', "\$chunks[\\1]", $tokens[$i]));
         }
 
         return $tokens;
@@ -402,11 +402,11 @@ class Doctrine_Connection_Mssql extends Doctrine_Connection_Common
 
         foreach($params as $key => $value) {
             $re = '/(?<=WHERE|VALUES|SET|JOIN)(.*?)(\?)/';
-            $query = preg_replace_callback($re, "\\1##{$key}##", $query, 1);
+            $query = preg_replace($re, "\\1##{$key}##", $query, 1);
         }
         
         $replacement = 'is_null($value) ? \'NULL\' : $this->quote($params[\\1])';
-        $query = preg_replace_callback('/##(\d+)##/e', $replacement, $query);
+        $query = preg_replace('/##(\d+)##/e', $replacement, $query);
 
         return $query;
 

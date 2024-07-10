@@ -709,7 +709,7 @@ class BasePeer
 		// add the select columns back
 		foreach ($selectColumns as $clause) {
 			// Generate a unique alias
-			$baseAlias = preg_replace_callback('/\W/', '_', $clause);
+			$baseAlias = preg_replace('/\W/', '_', $clause);
 			$alias = $baseAlias;
 			// If it already exists, add a unique suffix
 			$i = 0;

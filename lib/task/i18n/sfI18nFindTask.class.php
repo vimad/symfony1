@@ -81,7 +81,7 @@ EOF;
         $content = file_get_contents($template);
 
         // remove doctype
-        $content = preg_replace_callback('/<!DOCTYPE.*?>/', '', $content);
+        $content = preg_replace('/<!DOCTYPE.*?>/', '', $content);
 
         @$dom->loadXML('<doc>'.$content.'</doc>');
 

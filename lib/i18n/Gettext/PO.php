@@ -80,9 +80,9 @@ class TGettext_PO extends TGettext
         
         // get all msgids and msgtrs
         for ($i = 0; $i < $matched; $i++) {
-            $msgid = preg_replace_callback(
+            $msgid = preg_replace(
                 '/\s*msgid\s*"(.*)"\s*/s', '\\1', $matches[1][$i]);
-            $msgstr= preg_replace_callback(
+            $msgstr= preg_replace(
                 '/\s*msgstr\s*"(.*)"\s*/s', '\\1', $matches[4][$i]);
             $this->strings[parent::prepare($msgid)] = parent::prepare($msgstr);
         }
