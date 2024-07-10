@@ -234,7 +234,7 @@ class sfViewCacheManager
 
       foreach ($varyHeaders as $header)
       {
-        $varys[] = $header . '-' . preg_replace('/\W+/', '_', $request->getHttpHeader($header));
+        $varys[] = $header . '-' . preg_replace_callback('/\W+/', '_', $request->getHttpHeader($header));
       }
       $vary = implode($varys, '-');
     }
@@ -260,8 +260,8 @@ class sfViewCacheManager
       $hostName = $this->context->getRequest()->getHost();
     }
 
-    $hostName = preg_replace('/[^a-z0-9\*]/i', '_', $hostName);
-    $hostName = preg_replace('/_+/', '_', $hostName);
+    $hostName = preg_replace_callback('/[^a-z0-9\*]/i', '_', $hostName);
+    $hostName = preg_replace_callback('/_+/', '_', $hostName);
 
     return strtolower($hostName);
   }

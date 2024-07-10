@@ -23,7 +23,7 @@ require_once 'phing/util/regexp/RegexpEngine.php';
 
 /**
  * PREG Regexp Engine.
- * Implements a regexp engine using PHP's preg_match(), preg_match_all(), and preg_replace() functions.
+ * Implements a regexp engine using PHP's preg_match(), preg_match_all(), and preg_replace_callback() functions.
  * 
  * @author hans lellelid, hans@velum.net
  * @package phing.util.regex
@@ -96,8 +96,8 @@ class PregEngine implements RegexpEngine {
     function replace($pattern, $replace, $source) {
         // convert \1 -> $1, because we want to use the more generic \1 in the XML
         // but PREG prefers $1 syntax.
-        $replace = preg_replace('/\\\(\d+)/', '\$$1', $replace);
-        return preg_replace($this->preparePattern($pattern), $replace, $source);
+        $replace = preg_replace_callback('/\\\(\d+)/', '\$$1', $replace);
+        return preg_replace_callback($this->preparePattern($pattern), $replace, $source);
     }
 
 }

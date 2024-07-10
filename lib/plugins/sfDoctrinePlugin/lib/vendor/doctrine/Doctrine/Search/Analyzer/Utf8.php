@@ -46,7 +46,7 @@ class Doctrine_Search_Analyzer_Utf8 extends Doctrine_Search_Analyzer_Standard
             $text = iconv($encoding, 'UTF-8', $text);
         }
 
-        $text = preg_replace('/[^\p{L}\p{N}]+/u', ' ', $text);
+        $text = preg_replace_callback('/[^\p{L}\p{N}]+/u', ' ', $text);
         $text = str_replace('  ', ' ', $text);
 
         $terms = explode(' ', $text);

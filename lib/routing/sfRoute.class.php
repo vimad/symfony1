@@ -763,7 +763,7 @@ class sfRoute implements Serializable
       $tmp = '/'.$tmp;
     }
 
-    return preg_replace('#'.$this->options['segment_separators_regex'].'\*('.$this->options['segment_separators_regex'].'|$)#', "$tmp$1", $url);
+    return preg_replace_callback('#'.$this->options['segment_separators_regex'].'\*('.$this->options['segment_separators_regex'].'|$)#', "$tmp$1", $url);
   }
 
   protected function mergeArrays($arr1, $arr2)

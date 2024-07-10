@@ -60,7 +60,7 @@ class sfInflector
    */
   public static function demodulize($class_name_in_module)
   {
-    return preg_replace('/^.*::/', '', $class_name_in_module);
+    return preg_replace_callback('/^.*::/', '', $class_name_in_module);
   }
 
   /**

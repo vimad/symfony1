@@ -82,7 +82,7 @@ class StripLineBreaks extends BaseParamFilterReader implements ChainableReader {
             return -1;
         }
         
-        $buffer = preg_replace("/[".$this->_lineBreaks."]/", '', $buffer);           
+        $buffer = preg_replace_callback("/[".$this->_lineBreaks."]/", '', $buffer);           
 
         return $buffer;
     }

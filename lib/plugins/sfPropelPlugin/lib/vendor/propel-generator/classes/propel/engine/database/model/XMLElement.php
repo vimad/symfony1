@@ -178,7 +178,7 @@ abstract class XMLElement {
 		$doc->formatOutput = true;
 		$this->appendXml($doc);
 		$xmlstr = $doc->saveXML();
-		return trim(preg_replace('/<\?xml.*?\?>/', '', $xmlstr));
+		return trim(preg_replace_callback('/<\?xml.*?\?>/', '', $xmlstr));
 	}
 	
 	/**

@@ -127,7 +127,7 @@ EOF;
       $options .= ($options ? "\n".str_repeat(' ', 13) : '').$name.': '.$this->formatValue($value);
     }
     $this->log(sprintf('%s      %s', $this->formatter->format('Options', 'COMMENT'), $options));
-    $this->log(sprintf('%s        %s', $this->formatter->format('Regex', 'COMMENT'), preg_replace('/^             /', '', preg_replace('/^/m', '             ', $route->getRegex()))));
+    $this->log(sprintf('%s        %s', $this->formatter->format('Regex', 'COMMENT'), preg_replace_callback('/^             /', '', preg_replace_callback('/^/m', '             ', $route->getRegex()))));
 
     $tokens = '';
     foreach ($route->getTokens() as $token)
@@ -160,7 +160,7 @@ EOF;
     }
     else
     {
-      return preg_replace("/\n\s*/s", '', var_export($value, true));
+      return preg_replace_callback("/\n\s*/s", '', var_export($value, true));
     }
   }
 }

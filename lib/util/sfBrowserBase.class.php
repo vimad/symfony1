@@ -236,7 +236,7 @@ abstract class sfBrowserBase
     $queryString = html_entity_decode($queryString);
 
     // remove anchor
-    $path = preg_replace('/#.*/', '', $path);
+    $path = preg_replace_callback('/#.*/', '', $path);
 
     // removes all fields from previous request
     $this->fields = array();
@@ -998,7 +998,7 @@ abstract class sfBrowserBase
         unset($this->defaultServerArray['HTTPS']);
       }
 
-      $uri = preg_replace('#^https?\://[^/]+/#', '/', $uri);
+      $uri = preg_replace_callback('#^https?\://[^/]+/#', '/', $uri);
     }
     $uri = str_replace('/index.php', '', $uri);
 

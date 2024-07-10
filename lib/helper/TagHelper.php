@@ -72,8 +72,8 @@ function comment_as_conditional($condition, $content)
  */
 function escape_javascript($javascript = '')
 {
-  $javascript = preg_replace('/\r\n|\n|\r/', "\\n", $javascript);
-  $javascript = preg_replace('/(["\'])/', '\\\\\1', $javascript);
+  $javascript = preg_replace_callback('/\r\n|\n|\r/', "\\n", $javascript);
+  $javascript = preg_replace_callback('/(["\'])/', '\\\\\1', $javascript);
 
   return $javascript;
 }
@@ -97,7 +97,7 @@ function escape_once($html)
  */
 function fix_double_escape($escaped)
 {
-  return preg_replace('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $escaped);
+  return preg_replace_callback('/&amp;([a-z]+|(#\d+)|(#x[\da-f]+));/i', '&$1;', $escaped);
 }
 
 function _tag_options($options = array())

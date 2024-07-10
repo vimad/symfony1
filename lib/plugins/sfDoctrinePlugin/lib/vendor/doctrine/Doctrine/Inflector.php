@@ -45,7 +45,7 @@ class Doctrine_Inflector
      */
     public static function tableize($word)
     {
-        return strtolower(preg_replace('~(?<=\\w)([A-Z])~', '_$1', $word));
+        return strtolower(preg_replace_callback('~(?<=\\w)([A-Z])~', '_$1', $word));
     }
 
     /**
@@ -59,7 +59,7 @@ class Doctrine_Inflector
         static $cache = array();
 
         if (!isset($cache[$word])) {
-            $word = preg_replace('/[$]/', '', $word);
+            $word = preg_replace_callback('/[$]/', '', $word);
             $classify = preg_replace_callback('~(_?)([-_])([\w])~', array("Doctrine_Inflector", "classifyCallback"), ucfirst(strtolower($word)));
             $cache[$word] = $classify;
         }
@@ -265,13 +265,13 @@ class Doctrine_Inflector
         }
 
         // Remove all none word characters
-        $text = preg_replace('/\W/', ' ', $text);
+        $text = preg_replace_callback('/\W/', ' ', $text);
 
         // More stripping. Replace spaces with dashes
-        $text = strtolower(preg_replace('/[^A-Z^a-z^0-9^\/]+/', '-',
-                           preg_replace('/([a-z\d])([A-Z])/', '\1_\2',
-                           preg_replace('/([A-Z]+)([A-Z][a-z])/', '\1_\2',
-                           preg_replace('/::/', '/', $text)))));
+        $text = strtolower(preg_replace_callback('/[^A-Z^a-z^0-9^\/]+/', '-',
+                           preg_replace_callback('/([a-z\d])([A-Z])/', '\1_\2',
+                           preg_replace_callback('/([A-Z]+)([A-Z][a-z])/', '\1_\2',
+                           preg_replace_callback('/::/', '/', $text)))));
 
         return trim($text, '-');
     }
